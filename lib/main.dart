@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:kinvo_mobile_test/core/theme/app_colors.dart';
+import 'package:kinvo_mobile_test/data/datasources/stocks_datasources.dart';
 import 'package:kinvo_mobile_test/ui/home/view/home_view.dart';
 import 'package:kinvo_mobile_test/ui/investiment_funds/view/investiment_funds_view.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view/national_stocks_view.dart';
+import 'package:kinvo_mobile_test/ui/national_stocks/view_model/stocks_view_model.dart';
+import 'package:provider/provider.dart';
+
+import 'core/services/dio_client.dart';
+
+// O StockViewModel precisa do Dio para poder bater na api, por isso é criado uma instancia do Dio
+// Cada ChangeNotifierProvider é um componente do provider ele escuta as mudanças do viewmodel,
+// notifica os widgets que usam aquele viewModel para reconstruirem.
+
+// create: (_) => ...
+// Essa parte indica como criar a instância do ViewModel.
+// Ela é chamada apenas uma vez, quando o widget é inserido na árvore.
+
+// cria uma instância do StockDataSources, passando o dio (cliente HTTP).
+// e depois, usa essa datasource para criar o StocksViewModel.
+
+// .. cascade operator, após que o viewModel for construído,
+// imediatamente chama o fetchStocks()
 
 void main() {
-  runApp(const MyApp());
+  final dio = DioClient().dio;
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => StocksViewModel(StockDataSources(dio))..fetchStocks(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +48,7 @@ class MyApp extends StatelessWidget {
       title: 'Kinvo Mobile Test',
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.mainBackground,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         fontFamily: 'Montserrat',
       ),
       initialRoute: '/home',
