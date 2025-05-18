@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kinvo_mobile_test/shared/widgets/app_bar_custom.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view_model/stocks_view_model.dart';
+import 'package:kinvo_mobile_test/ui/national_stocks/widgets/stock_card.dart';
 import 'package:provider/provider.dart';
 
 class NationalStocksView extends StatelessWidget {
@@ -19,16 +20,15 @@ class NationalStocksView extends StatelessWidget {
             if (viewModel.error != null) {
               return Center(child: Text('Erro: ${viewModel.error}'));
             }
-            return ListView.builder(
-              itemCount: viewModel.stocks.length,
-              itemBuilder: (context, index) {
-                final stock = viewModel.stocks[index];
-                return ListTile(
-                  title: Text(stock.name),
-                  subtitle: Text(stock.ticker),
-                  trailing: Text(stock.profitability.toString()),
-                );
-              },
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: ListView.builder(
+                itemCount: viewModel.stocks.length,
+                itemBuilder: (context, index) {
+                  final stock = viewModel.stocks[index];
+                  return StockCard(nameStock: stock.name,tickerStock: stock.ticker,minimumValueStock: stock.minimumValue,profitabilityStock: stock.profitability,);
+                },
+              ),
             );
           },
         ),
