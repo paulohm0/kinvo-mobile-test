@@ -7,6 +7,7 @@ import 'package:kinvo_mobile_test/ui/investiment_funds/view/investiment_funds_vi
 import 'package:kinvo_mobile_test/ui/investiment_funds/view_model/funds_view_model.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view/national_stocks_view.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view_model/stocks_view_model.dart';
+import 'package:kinvo_mobile_test/ui/private_pension/view/private_pension_view.dart';
 import 'package:provider/provider.dart';
 
 import 'core/services/dio_client.dart';
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeView(),
         '/national_stocks': (context) => NationalStocksView(),
         '/investiments_funds': (context) => InvestimentFundsView(),
-        '/private_pension': (context) => NationalStocksView(),
+        '/private_pension': (context) => PrivatePensionView(),
       },
     );
   }

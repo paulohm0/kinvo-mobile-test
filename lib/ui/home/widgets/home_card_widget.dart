@@ -49,7 +49,7 @@ class HomeCardWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(title, style: AppTextStyles.titleHomeCard),
-                          Text(subtitle, style: AppTextStyles.subTitleHomeCard),
+                          Text(subtitle, style: AppTextStyles.subtitleHomeCard),
                         ],
                       ),
                     ),

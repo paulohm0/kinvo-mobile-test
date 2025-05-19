@@ -14,17 +14,17 @@ class AppTextStyles {
     fontSize: AppTextSizes.titleCard,
     fontWeight: FontWeight.w700,
   );
-  static const TextStyle subTitleHomeCard = TextStyle(
+  static const TextStyle subtitleHomeCard = TextStyle(
     color: AppColors.grey,
     fontSize: AppTextSizes.small,
     fontWeight: FontWeight.w600,
   );
-  static const TextStyle titleStockCard = TextStyle(
+  static const TextStyle titleCard = TextStyle(
     color: AppColors.grey2,
     fontSize: AppTextSizes.titleCard,
     fontWeight: FontWeight.w700,
   );
-  static const TextStyle subTitleStockCard = TextStyle(
+  static const TextStyle subtitleCard = TextStyle(
     color: AppColors.grey,
     fontSize: AppTextSizes.medium,
     fontWeight: FontWeight.w600,

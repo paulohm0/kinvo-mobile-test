@@ -45,11 +45,11 @@ class StockCardWidget extends StatelessWidget {
                                 children: [
                                   Text(
                                     nameStock,
-                                    style: AppTextStyles.titleStockCard,
+                                    style: AppTextStyles.titleCard,
                                   ),
                                   Text(
                                     tickerStock,
-                                    style: AppTextStyles.subTitleStockCard,
+                                    style: AppTextStyles.subtitleCard,
                                   ),
                                 ],
                               ),
