@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   provider: ^6.1.5
+  implicitly_animated_reorderable_list_2: ^0.6.0
 
 dev_dependencies:
   flutter_test:

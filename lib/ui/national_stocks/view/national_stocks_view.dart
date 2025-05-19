@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
+import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
+import 'package:kinvo_mobile_test/data/models/stocks/stock_model.dart';
 import 'package:kinvo_mobile_test/shared/widgets/app_bar_custom.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view_model/stocks_view_model.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/widgets/stock_card.dart';
@@ -22,11 +25,26 @@ class NationalStocksView extends StatelessWidget {
             }
             return Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
-              child: ListView.builder(
-                itemCount: viewModel.stocks.length,
-                itemBuilder: (context, index) {
-                  final stock = viewModel.stocks[index];
-                  return StockCard(nameStock: stock.name,tickerStock: stock.ticker,minimumValueStock: stock.minimumValue,profitabilityStock: stock.profitability,);
+              child: ImplicitlyAnimatedReorderableList<StockModel>(
+                items: viewModel.stocks,
+                areItemsTheSame:
+                    (stock1, stock2) => stock1.ticker == stock2.ticker,
+                onReorderFinished: (item, from, to, newItems) {},
+                itemBuilder: (context, itemAnimation, stock, index) {
+                  return Reorderable(
+                    key: ValueKey(stock.ticker),
+                    builder: (context, dragAnimation, inDrag) {
+                      return SizeFadeTransition(
+                        animation: itemAnimation,
+                        child: StockCard(
+                          nameStock: stock.name,
+                          tickerStock: stock.ticker,
+                          minimumValueStock: stock.minimumValue,
+                          profitabilityStock: stock.profitability,
+                        ),
+                      );
+                    },
+                  );
                 },
               ),
             );
