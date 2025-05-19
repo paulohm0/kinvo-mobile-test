@@ -33,8 +33,4 @@ class AppTextStyles {
     color: AppColors.grey2,
     fontWeight: FontWeight.w700,
   );
-  static const TextStyle profitValueStockCard = TextStyle(
-    color: AppColors.red,
-    fontWeight: FontWeight.w700,
-  );
 }

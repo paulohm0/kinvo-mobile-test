@@ -4,7 +4,7 @@ import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:kinvo_mobile_test/data/models/stocks/stock_model.dart';
 import 'package:kinvo_mobile_test/shared/widgets/app_bar_custom.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view_model/stocks_view_model.dart';
-import 'package:kinvo_mobile_test/ui/national_stocks/widgets/stock_card.dart';
+import 'package:kinvo_mobile_test/ui/national_stocks/widgets/stock_card_widget.dart';
 import 'package:provider/provider.dart';
 
 class NationalStocksView extends StatelessWidget {
@@ -36,7 +36,7 @@ class NationalStocksView extends StatelessWidget {
                     builder: (context, dragAnimation, inDrag) {
                       return SizeFadeTransition(
                         animation: itemAnimation,
-                        child: StockCard(
+                        child: StockCardWidget(
                           nameStock: stock.name,
                           tickerStock: stock.ticker,
                           minimumValueStock: stock.minimumValue,
