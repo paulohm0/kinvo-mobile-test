@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kinvo_mobile_test/data/datasources/stocks_datasources.dart';
+import 'package:kinvo_mobile_test/data/datasources/stocks/stocks_datasource.dart';
 import 'package:kinvo_mobile_test/data/models/stocks/stock_model.dart';
 
 class StocksViewModel extends ChangeNotifier {
-  final StockDataSources datasource;
+  final StockDatasource datasource;
 
   StocksViewModel(this.datasource);
 
@@ -15,12 +15,20 @@ class StocksViewModel extends ChangeNotifier {
   bool isFavorite(String ticker) => favoriteTickers.contains(ticker);
 
   void _sortStocks() {
-    stocks.sort((stock1, stock2) {  // retornar as ações em ordem alfabética e
-      final stock1Fav = isFavorite(stock1.ticker) ? 0 : 1; // verifica se é  favorito ou nao
+    stocks.sort((stock1, stock2) {
+      // retornar as ações em ordem alfabética e
+      final stock1Fav =
+          isFavorite(stock1.ticker) ? 0 : 1; // verifica se é  favorito ou nao
       final stock2Fav = isFavorite(stock2.ticker) ? 0 : 1;
-      final favComparison = stock1Fav.compareTo(stock2Fav); // compara se os dois stocks sao favoritos
-      if (favComparison != 0) return favComparison; // caso sejam diferentes, o favorito ganha prioridade na lista
-      return stock1.name.compareTo(stock2.name); // caso sejam iguais, retorna os dois em ordem alfabetica
+      final favComparison = stock1Fav.compareTo(
+        stock2Fav,
+      ); // compara se os dois stocks sao favoritos
+      if (favComparison != 0) {
+        return favComparison; // caso sejam diferentes, o favorito ganha prioridade na lista
+      }
+      return stock1.name.compareTo(
+        stock2.name,
+      ); // caso sejam iguais, retorna os dois em ordem alfabetica
     });
   }
 

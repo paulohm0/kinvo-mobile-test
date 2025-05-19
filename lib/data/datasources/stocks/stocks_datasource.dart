@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:kinvo_mobile_test/data/models/stocks/stock_model.dart';
 
-class StockDataSources {
+class StockDatasource {
   final Dio dio;
 
-  StockDataSources(this.dio);
+  StockDatasource(this.dio);
 
   Future<List<StockModel>> getStocks() async {
     try {

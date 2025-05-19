@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kinvo_mobile_test/core/theme/app_colors.dart';
-import 'package:kinvo_mobile_test/data/datasources/stocks_datasources.dart';
+import 'package:kinvo_mobile_test/data/datasources/funds/funds_datasource.dart';
+import 'package:kinvo_mobile_test/data/datasources/stocks/stocks_datasource.dart';
 import 'package:kinvo_mobile_test/ui/home/view/home_view.dart';
 import 'package:kinvo_mobile_test/ui/investiment_funds/view/investiment_funds_view.dart';
+import 'package:kinvo_mobile_test/ui/investiment_funds/view_model/funds_view_model.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view/national_stocks_view.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view_model/stocks_view_model.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +32,10 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => StocksViewModel(StockDataSources(dio))..fetchStocks(),
+          create: (_) => StocksViewModel(StockDatasource(dio))..fetchStocks(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FundsViewModel(FundsDatasource(dio))..fetchFunds(),
         ),
       ],
       child: const MyApp(),
