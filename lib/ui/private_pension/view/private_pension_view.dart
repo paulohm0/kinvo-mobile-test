@@ -33,9 +33,9 @@ class PrivatePensionView extends StatelessWidget {
                     Divider(height: 1.0),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: viewModel.allPensions.length,
+                        itemCount: viewModel.filteredPensions.length,
                         itemBuilder: (context, index) {
-                          final pension = viewModel.allPensions[index];
+                          final pension = viewModel.filteredPensions[index];
                           return PrivatePensionCardWidget(
                             namePension: pension.name,
                             typePension: pension.type,

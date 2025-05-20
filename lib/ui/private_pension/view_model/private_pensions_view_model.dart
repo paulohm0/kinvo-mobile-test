@@ -14,19 +14,26 @@ class PrivatePensionsViewModel extends ChangeNotifier {
   String? selectedFilter;
 
   void applyFilter(String filter) {
-    selectedFilter = filter;
-
-    if (filter == 'SEM TAXA') {
+    if (selectedFilter == filter) {
+      // Se já estiver selecionado, limpa o filtro
+      selectedFilter = null;
+      filteredPensions = allPensions;
+    } else {
+      selectedFilter = filter;
       filteredPensions =
-          allPensions.where((pension) => pension.tax == 0).toList();
-    } else if (filter == 'R\$ 100,00') {
-      filteredPensions =
-          allPensions.where((pension) => pension.minimumValue == 100).toList();
-    } else if (filter == 'D+1') {
-      filteredPensions =
-          allPensions.where((pension) => pension.redemptionTerm == 1).toList();
+          allPensions.where((pension) {
+            switch (filter) {
+              case 'SEM TAXA':
+                return pension.tax == 0;
+              case 'R\$ 100,00':
+                return pension.minimumValue == 100.0;
+              case 'D+1':
+                return pension.redemptionTerm == 1;
+              default:
+                return true;
+            }
+          }).toList();
     }
-
     notifyListeners();
   }
 
@@ -37,6 +44,11 @@ class PrivatePensionsViewModel extends ChangeNotifier {
 
     try {
       allPensions = await datasource.getPensions();
+      allPensions.sort(
+        (pension1, pension2) =>
+            pension1.name.toLowerCase().compareTo(pension2.name.toLowerCase()),
+      );
+      filteredPensions = allPensions;
     } catch (e) {
       error = e.toString();
     } finally {
