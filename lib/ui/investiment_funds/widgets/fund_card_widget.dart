@@ -27,7 +27,7 @@ class FundCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<FundsViewModel>(
       builder: (context, viewModel, _) {
-        final isClosedFund = viewModel.isFechado(statusFund);
+        final isClosedFund = viewModel.isClosedFund(statusFund);
         return Stack(
           children: [
             Card(

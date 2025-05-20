@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:kinvo_mobile_test/core/theme/app_colors.dart';
 import 'package:kinvo_mobile_test/data/datasources/funds/funds_datasource.dart';
 import 'package:kinvo_mobile_test/data/models/funds/fund_model.dart';
@@ -12,7 +12,7 @@ class FundsViewModel extends ChangeNotifier {
   bool isLoading = false;
   String? error;
 
-  bool isFechado(int status) => status == 2;
+  bool isClosedFund(int status) => status == 2;
 
   Color getStatusColor(int status) {
     switch (status) {
