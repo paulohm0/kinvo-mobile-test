@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kinvo_mobile_test/shared/widgets/app_bar_custom.dart';
 import 'package:kinvo_mobile_test/shared/widgets/loading_error_wrapper.dart';
 import 'package:kinvo_mobile_test/ui/private_pension/view_model/private_pensions_view_model.dart';
+import 'package:kinvo_mobile_test/ui/private_pension/widgets/filter_pension.dart';
+import 'package:kinvo_mobile_test/ui/private_pension/widgets/private_pension_card_widget.dart';
 import 'package:provider/provider.dart';
 
 class PrivatePensionView extends StatelessWidget {
@@ -17,15 +19,36 @@ class PrivatePensionView extends StatelessWidget {
             return LoadingErrorWrapper(
               isLoading: viewModel.isLoading,
               error: viewModel.error,
-              child: ListView.builder(
-                itemCount: viewModel.pensions.length,
-                itemBuilder: (context, index) {
-                  final pension = viewModel.pensions[index];
-                  return ListTile(
-                    title: Text(pension.name),
-                    subtitle: Text(pension.type),
-                  );
-                },
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 24.0,
+                      ),
+                      child: FilterPension(viewModel: viewModel),
+                    ),
+                    Divider(height: 1.0),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: viewModel.allPensions.length,
+                        itemBuilder: (context, index) {
+                          final pension = viewModel.allPensions[index];
+                          return PrivatePensionCardWidget(
+                            namePension: pension.name,
+                            typePension: pension.type,
+                            taxPension: pension.tax,
+                            minimumValuePension: pension.minimumValue,
+                            redemptionTermPension: pension.redemptionTerm,
+                            profitabilityPension: pension.profitability,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },

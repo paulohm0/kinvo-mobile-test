@@ -39,6 +39,7 @@ class NationalStocksView extends StatelessWidget {
                             tickerStock: stock.ticker,
                             minimumValueStock: stock.minimumValue,
                             profitabilityStock: stock.profitability,
+                            viewModel: viewModel,
                           ),
                         );
                       },

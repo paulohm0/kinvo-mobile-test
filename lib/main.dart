@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 
 import 'core/services/dio_client.dart';
 
-// O StockViewModel precisa do Dio para poder bater na api, por isso é criado uma instancia do Dio
+// Os ViewModels precisam do Dio para poder bater na api, por isso é criado uma instancia do Dio
 // Cada ChangeNotifierProvider é um componente do provider ele escuta as mudanças do viewmodel,
 // notifica os widgets que usam aquele viewModel para reconstruirem.
 

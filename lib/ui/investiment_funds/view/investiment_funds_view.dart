@@ -31,6 +31,7 @@ class InvestimentFundsView extends StatelessWidget {
                       ratingFund: fund.rating,
                       minimumValueFund: fund.minimumValue,
                       profitabilityFund: fund.profitability,
+                      viewModel: viewModel,
                     );
                   },
                 ),

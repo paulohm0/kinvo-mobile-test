@@ -7,9 +7,28 @@ class PrivatePensionsViewModel extends ChangeNotifier {
 
   PrivatePensionsViewModel(this.datasource);
 
-  List<PrivatePensionModel> pensions = [];
+  List<PrivatePensionModel> allPensions = [];
+  List<PrivatePensionModel> filteredPensions = [];
   String? error;
   bool isLoading = false;
+  String? selectedFilter;
+
+  void applyFilter(String filter) {
+    selectedFilter = filter;
+
+    if (filter == 'SEM TAXA') {
+      filteredPensions =
+          allPensions.where((pension) => pension.tax == 0).toList();
+    } else if (filter == 'R\$ 100,00') {
+      filteredPensions =
+          allPensions.where((pension) => pension.minimumValue == 100).toList();
+    } else if (filter == 'D+1') {
+      filteredPensions =
+          allPensions.where((pension) => pension.redemptionTerm == 1).toList();
+    }
+
+    notifyListeners();
+  }
 
   Future<void> fetchPensions() async {
     isLoading = true;
@@ -17,7 +36,7 @@ class PrivatePensionsViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      pensions = await datasource.getPensions();
+      allPensions = await datasource.getPensions();
     } catch (e) {
       error = e.toString();
     } finally {
