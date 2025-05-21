@@ -1,16 +1,35 @@
-# kinvo_mobile_test
+# <p align="center"> kinvo_mobile_test
+<p> A ideia do app surgiu a partir de uma seleção realizada pela empresa Kinvo. (Não participei da seleção, apenas utilizei o repositório do desafio como base para estudo e criação deste app, seguindo as especificações propostas e apenas mudando o framework que seria em ReactNative e eu fiz em Flutter).
+  
+O desafio consiste em desenvolver um aplicativo com quatro telas. Todas as telas, com exceção da Home, se conectam a APIs e devem estar preparadas para tratar os seguintes estados: erro (sem internet), carregamento (chamada à API em andamento) e lista vazia (quando o resultado de um filtro não contém itens ou o retorno da API for vazio).
 
-Flutter project.
+link do repo da challenge : https://github.com/kinvoapp/kinvo-mobile-test/tree/master?tab=readme-ov-file
 
-## Getting Started
+**API consumida:**  
+[https://6266f62263e0f382568936e4.mockapi.io](https://6266f62263e0f382568936e4.mockapi.io)
 
-This project is a starting point for a Flutter application.
+**Endpoints:**
 
-A few resources to get you started if this is your first Flutter project:
+- `/funds`
+- `/stocks`
+- `/pension`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## ⚙️ Habilidades Testadas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    ✅ Construção de Tela
+    ✅ Consumo de API
+    ✅ Tratamento de erros
+    ✅ Gerenciamento de estado e injeção de dependência com Provider
+    ✅ Aplicação dos padrões MVVM e Clean Architecture
+    ✅ Implementação do Repository Pattern
+    ✅ Integração de bibliotecas externas
+    
+
+## 📱 Imagens
+
+<p float="left">
+<img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnNueXVsN3RwMDFieXUwOHRwM2oxNTY0czNkMDNqMWdud3R1N2IxaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EZx6ebaCle78w90aji/giphy.gif" alt="Tela do App" width="300"/>
+</p>
+
+
+
