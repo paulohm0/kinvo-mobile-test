@@ -16,9 +16,8 @@ class StocksViewModel extends ChangeNotifier {
 
   void _sortStocks() {
     stocks.sort((stock1, stock2) {
-      // retornar as ações em ordem alfabética e
-      final stock1Fav =
-          isFavorite(stock1.ticker) ? 0 : 1; // verifica se é  favorito ou nao
+      // retornar as ações em ordem alfabética e verifica se é  favorito ou nao
+      final stock1Fav = isFavorite(stock1.ticker) ? 0 : 1;
       final stock2Fav = isFavorite(stock2.ticker) ? 0 : 1;
       final favComparison = stock1Fav.compareTo(
         stock2Fav,

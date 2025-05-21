@@ -22,11 +22,11 @@ import 'core/services/dio_client.dart';
 // Essa parte indica como criar a instância do ViewModel.
 // Ela é chamada apenas uma vez, quando o widget é inserido na árvore.
 
-// cria uma instância do StockDataSources, passando o dio (cliente HTTP).
-// e depois, usa essa datasource para criar o StocksViewModel.
+// cria uma instância do DataSources, passando o dio (cliente HTTP).
+// e depois, usa essa datasource para criar o ViewModel.
 
 // .. cascade operator, após que o viewModel for construído,
-// imediatamente chama o fetchStocks()
+// imediatamente chama o fetch()
 
 void main() {
   final dio = DioClient().dio;
