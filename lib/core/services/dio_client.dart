@@ -8,10 +8,10 @@ class DioClient {
         BaseOptions(
           baseUrl: 'https://6266f62263e0f382568936e4.mockapi.io',
           connectTimeout: const Duration(
-            seconds: 10,
+            seconds: 3,
           ), // tempo para conseguir abrir conexão com o servidor.
           receiveTimeout: const Duration(
-            seconds: 10,
+            seconds: 3,
           ), // tempo para receber os dados depois que a conexão foi feita.
           headers: {'Content-Type': 'application/json'},
           // sobre o headers ...

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kinvo_mobile_test/shared/enums/view_state.dart';
 import 'package:kinvo_mobile_test/shared/widgets/app_bar_custom.dart';
 import 'package:kinvo_mobile_test/shared/widgets/loading_error_wrapper.dart';
 import 'package:kinvo_mobile_test/ui/investiment_funds/view_model/funds_view_model.dart';
@@ -16,10 +17,14 @@ class InvestimentFundsView extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: Consumer<FundsViewModel>(
-            builder: (context, viewModel, _) {
+            builder: (context, viewModel, child) {
               return LoadingErrorWrapper(
-                isLoading: viewModel.isLoading,
-                error: viewModel.error,
+                isLoading: viewModel.state == ViewState.loading,
+                error:
+                    viewModel.state == ViewState.error
+                        ? viewModel.errorMessage
+                        : null,
+                onRetry: viewModel.fetchFunds,
                 child: ListView.builder(
                   itemCount: viewModel.funds.length,
                   itemBuilder: (context, index) {

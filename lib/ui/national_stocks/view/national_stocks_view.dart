@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
 import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:kinvo_mobile_test/data/models/stocks/stock_model.dart';
+import 'package:kinvo_mobile_test/shared/enums/view_state.dart';
 import 'package:kinvo_mobile_test/shared/widgets/app_bar_custom.dart';
 import 'package:kinvo_mobile_test/shared/widgets/loading_error_wrapper.dart';
 import 'package:kinvo_mobile_test/ui/national_stocks/view_model/stocks_view_model.dart';
@@ -19,8 +20,12 @@ class NationalStocksView extends StatelessWidget {
         body: Consumer<StocksViewModel>(
           builder: (context, viewModel, _) {
             return LoadingErrorWrapper(
-              isLoading: viewModel.isLoading,
-              error: viewModel.error,
+              isLoading: viewModel.state == ViewState.loading,
+              error:
+                  viewModel.state == ViewState.error
+                      ? viewModel.errorMessage
+                      : null,
+              onRetry: viewModel.fetchStocks,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: ImplicitlyAnimatedReorderableList<StockModel>(

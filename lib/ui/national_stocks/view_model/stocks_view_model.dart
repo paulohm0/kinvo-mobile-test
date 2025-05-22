@@ -1,16 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:kinvo_mobile_test/data/datasources/stocks/stocks_datasource.dart';
 import 'package:kinvo_mobile_test/data/models/stocks/stock_model.dart';
+import 'package:kinvo_mobile_test/shared/enums/view_state.dart';
+import 'package:kinvo_mobile_test/shared/view_model/base_view_model.dart';
 
-class StocksViewModel extends ChangeNotifier {
+class StocksViewModel extends BaseViewModel {
   final StockDatasource datasource;
 
   StocksViewModel(this.datasource);
 
   List<StockModel> stocks = [];
-  bool isLoading = false;
-  String? error;
-  Set<String> favoriteTickers = {}; // Guarda os tickers favoritos
+  Set<String> favoriteTickers = {};
 
   bool isFavorite(String ticker) => favoriteTickers.contains(ticker);
 
@@ -42,18 +41,14 @@ class StocksViewModel extends ChangeNotifier {
   }
 
   Future<void> fetchStocks() async {
-    isLoading = true;
-    error = null;
-    notifyListeners();
-
     try {
+      setState(ViewState.loading);
       stocks = await datasource.getStocks();
+      setState(ViewState.success);
       _sortStocks();
-    } catch (e) {
-      error = e.toString();
-    } finally {
-      isLoading = false;
-      notifyListeners();
+    } catch (error) {
+      setState(ViewState.error, 'Não foi possivel buscar a lista de Ações');
     }
+    notifyListeners();
   }
 }

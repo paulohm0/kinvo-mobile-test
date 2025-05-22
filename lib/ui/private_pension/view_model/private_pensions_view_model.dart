@@ -1,28 +1,32 @@
-import 'package:flutter/material.dart';
 import 'package:kinvo_mobile_test/data/datasources/private_pensions/private_pensions_datasource.dart';
 import 'package:kinvo_mobile_test/data/models/private_pensions/private_pension_model.dart';
+import 'package:kinvo_mobile_test/shared/enums/view_state.dart';
+import 'package:kinvo_mobile_test/shared/view_model/base_view_model.dart';
 
-class PrivatePensionsViewModel extends ChangeNotifier {
+class PrivatePensionsViewModel extends BaseViewModel {
   final PrivatePensionsDatasource datasource;
 
   PrivatePensionsViewModel(this.datasource);
 
   List<PrivatePensionModel> allPensions = [];
   List<PrivatePensionModel> filteredPensions = [];
-  String? error;
-  bool isLoading = false;
-  String? selectedFilter;
+  List<String> selectedFilters = [];
 
   void applyFilter(String filter) {
-    if (selectedFilter == filter) {
-      // Se já estiver selecionado, limpa o filtro
-      selectedFilter = null;
-      filteredPensions = allPensions;
+    if (selectedFilters.contains(filter)) {
+      selectedFilters.remove(filter); // Remove se já estiver
     } else {
-      selectedFilter = filter;
-      filteredPensions =
-          allPensions.where((pension) {
-            switch (filter) {
+      selectedFilters.add(filter); // Adiciona se não estiver
+    }
+
+    filteredPensions =
+        allPensions.where((pension) {
+          // Se nenhum filtro estiver ativo, retorna tudo
+          if (selectedFilters.isEmpty) return true;
+
+          // Verifica se atende a TODOS os filtros
+          return selectedFilters.every((f) {
+            switch (f) {
               case 'SEM TAXA':
                 return pension.tax == 0;
               case 'R\$ 100,00':
@@ -32,28 +36,25 @@ class PrivatePensionsViewModel extends ChangeNotifier {
               default:
                 return true;
             }
-          }).toList();
-    }
+          });
+        }).toList();
+
     notifyListeners();
   }
 
   Future<void> fetchPensions() async {
-    isLoading = true;
-    error = null;
-    notifyListeners();
-
     try {
+      setState(ViewState.loading);
       allPensions = await datasource.getPensions();
+      setState(ViewState.success);
       allPensions.sort(
         (pension1, pension2) =>
             pension1.name.toLowerCase().compareTo(pension2.name.toLowerCase()),
       );
       filteredPensions = allPensions;
-    } catch (e) {
-      error = e.toString();
-    } finally {
-      isLoading = false;
-      notifyListeners();
+    } catch (error) {
+      setState(ViewState.error, 'Não foi possivel buscar as Previdências');
     }
+    notifyListeners();
   }
 }
