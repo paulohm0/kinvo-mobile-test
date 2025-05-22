@@ -19,7 +19,7 @@ class FilterPension extends StatelessWidget {
   }
 
   Widget _buildFilterButton(String label) {
-    final bool isSelected = viewModel.selectedFilter == label;
+    final bool isSelected = viewModel.selectedFilters.contains(label);
 
     return ElevatedButton(
       onPressed: () => viewModel.applyFilter(label),
