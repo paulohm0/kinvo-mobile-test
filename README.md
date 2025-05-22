@@ -29,6 +29,7 @@ link do repo da challenge : https://github.com/kinvoapp/kinvo-mobile-test/tree/m
 
 <p float="left">
 <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnNueXVsN3RwMDFieXUwOHRwM2oxNTY0czNkMDNqMWdud3R1N2IxaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EZx6ebaCle78w90aji/giphy.gif" alt="Tela do App" width="300"/>
+<img src="https://i.imgur.com/sdSekOu.png" alt="Tela do App" width="300"/>
 </p>
 
 
